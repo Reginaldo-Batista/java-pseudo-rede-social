@@ -24,8 +24,14 @@ public class User {
 
     public Post createPost(String postTitle, String postContent) {
         Post newPost = new Post(this, postTitle, postContent);
-        this.userPosts.addFirst(newPost);
+        this.userPosts.add(newPost);
         return newPost;
+    }
+
+    public Comment commentOnPost(String comment, Post post) {
+        Comment newComment = post.addComment(this, comment);
+        this.userComments.addFirst(newComment);
+        return newComment;
     }
 
     public Instant getDateAccountCreation() {

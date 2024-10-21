@@ -35,4 +35,8 @@ public class Comment {
         return commentCreationDate;
     }
 
+    public String toString() {
+        return "\n-> " + this.commentOwner.getName() + ": " + this.commentContent + "\n";
+    }
+
 }

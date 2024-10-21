@@ -19,6 +19,12 @@ public class Post {
         this.postComments = new LinkedList<>();
     }
 
+    public Comment addComment(User commentOwner, String content) {
+        Comment newComment = new Comment(this, commentOwner, content);
+        this.postComments.add(newComment);
+        return newComment;
+    }
+
     public User getPostOwner() {
         return postOwner;
     }
@@ -52,11 +58,11 @@ public class Post {
     }
 
     public String toString() {
-        return "\nPost {\n" +
-                "Postado por: " + postOwner.getName() +
-                "\nTítulo do post: " + postTitle +
-                "\nConteúdo do post: " + postContent +
+        return "\nPost de " + postOwner.getName() +  
+                "\nTítulo: " + postTitle +
+                "\nConteúdo: " + postContent +
                 "\nData de postagem: " + postCreationDate +
-                "\n}\n";
+                "\n\n" +
+                "Comentários:\n" + postComments + "\n";
     }
 }
