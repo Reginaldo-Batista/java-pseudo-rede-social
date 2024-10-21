@@ -1,3 +1,5 @@
+package aplicativo;
+
 import classes.User;
 import classes.Post;
 
