@@ -1,6 +1,8 @@
 package classes;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class User {
     private String email;
     private String password;
     private Instant dateAccountCreation;
+    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
     private List<Post> userPosts;
     private List<Comment> userComments;
 
@@ -72,6 +75,10 @@ public class User {
 
     public void setUserComments(List<Comment> userComments) {
         this.userComments = userComments;
+    }
+
+    public String toString() {
+        return "Nome: " + name + "\nEmail: " + email + "\nData de criação da conta: " + formatTime.format(dateAccountCreation);
     }
 
 }
