@@ -1,6 +1,8 @@
 package classes;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,14 +10,15 @@ public class Post {
     private User postOwner;
     private String postTitle;
     private String postContent;
-    private Instant postCreationDate;
+    private Instant postCreationDateTime;
+    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
     private List<Comment> postComments;
 
     public Post(User postOwner, String postTitle, String postContent) {
         this.postOwner = postOwner;
         this.postTitle = postTitle;
         this.postContent = postContent;
-        this.postCreationDate = Instant.now();
+        this.postCreationDateTime = Instant.now();
         this.postComments = new LinkedList<>();
     }
 
@@ -45,8 +48,8 @@ public class Post {
         this.postContent = postContent;
     }
 
-    public Instant getPostCreationDate() {
-        return postCreationDate;
+    public Instant getPostCreationDateTime() {
+        return postCreationDateTime;
     }
 
     public List<Comment> getPostComments() {
@@ -61,7 +64,7 @@ public class Post {
         return "\nPost de " + postOwner.getName() +  
                 "\nTítulo: " + postTitle +
                 "\nConteúdo: " + postContent +
-                "\nData de postagem: " + postCreationDate +
+                "\nData de postagem: " + formatTime.format(postCreationDateTime) +
                 "\n\n" +
                 "Comentários:\n" + postComments + "\n";
     }

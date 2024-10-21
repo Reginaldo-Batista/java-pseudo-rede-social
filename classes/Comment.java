@@ -1,12 +1,15 @@
 package classes;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class Comment {
     private Post commentedPost;
     private User commentOwner;
     private String commentContent;
     private Instant commentCreationDate;
+    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
 
     public Comment(Post commentedPost, User commentOwner, String commentContent) {
         this.commentedPost = commentedPost;
@@ -36,7 +39,8 @@ public class Comment {
     }
 
     public String toString() {
-        return "\n-> " + this.commentOwner.getName() + ": " + this.commentContent + "\n";
+        return "\n-> " + this.commentOwner.getName() + ": " + this.commentContent + "\n"
+        + formatTime.format(commentCreationDate);
     }
 
 }
