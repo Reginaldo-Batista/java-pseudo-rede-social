@@ -1,21 +1,22 @@
 package classes;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Post {
     private User postOwner;
     private String postTitle;
     private String postContent;
-    private Instant postCreationDate = Instant.now();
-
-    private List<Comment> postComments = new ArrayList<>();
+    private Instant postCreationDate;
+    private List<Comment> postComments;
 
     public Post(User postOwner, String postTitle, String postContent) {
         this.postOwner = postOwner;
         this.postTitle = postTitle;
         this.postContent = postContent;
+        this.postCreationDate = Instant.now();
+        this.postComments = new LinkedList<>();
     }
 
     public User getPostOwner() {
@@ -48,5 +49,14 @@ public class Post {
 
     public void setPostComments(List<Comment> postComments) {
         this.postComments = postComments;
+    }
+
+    public String toString() {
+        return "\nPost {\n" +
+                "Postado por: " + postOwner.getName() +
+                "\nTítulo do post: " + postTitle +
+                "\nConteúdo do post: " + postContent +
+                "\nData de postagem: " + postCreationDate +
+                "\n}\n";
     }
 }

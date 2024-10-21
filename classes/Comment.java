@@ -6,12 +6,13 @@ public class Comment {
     private Post commentedPost;
     private User commentOwner;
     private String commentContent;
-    private Instant commentCreationDate = Instant.now();
+    private Instant commentCreationDate;
 
     public Comment(Post commentedPost, User commentOwner, String commentContent) {
         this.commentedPost = commentedPost;
         this.commentOwner = commentOwner;
         this.commentContent = commentContent;
+        this.commentCreationDate =  Instant.now();
     }
 
     public Post getCommentedPost() {

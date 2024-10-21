@@ -1,7 +1,7 @@
 package classes;
 
 import java.time.Instant;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -9,15 +9,23 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Instant dateAccountCreation = Instant.now();
+    private Instant dateAccountCreation;
+    private List<Post> userPosts;
+    private List<Comment> userComments;
 
-    private List<Post> userPosts = new ArrayList<>();
-    private List<Comment> userComments = new ArrayList<>();
-
-    public User(String nome, String email, String password) {
-        this.setName(password);
+    public User(String name, String email, String password) {
+        this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
+        this.dateAccountCreation = Instant.now();
+        this.userPosts = new LinkedList<>();
+        this.userComments = new LinkedList<>();
+    }
+
+    public Post createPost(String postTitle, String postContent) {
+        Post newPost = new Post(this, postTitle, postContent);
+        this.userPosts.addFirst(newPost);
+        return newPost;
     }
 
     public Instant getDateAccountCreation() {
@@ -43,4 +51,21 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public List<Post> getUserPosts() {
+        return userPosts;
+    }
+
+    public void setUserPosts(List<Post> userPosts) {
+        this.userPosts = userPosts;
+    }
+
+    public List<Comment> getUserComments() {
+        return userComments;
+    }
+
+    public void setUserComments(List<Comment> userComments) {
+        this.userComments = userComments;
+    }
+
 }
