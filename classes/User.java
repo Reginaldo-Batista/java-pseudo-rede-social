@@ -12,7 +12,9 @@ public class User {
     private String email;
     private String password;
     private Instant dateAccountCreation;
-    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
+    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")
+            .withZone(ZoneId.systemDefault());
+    private List<User> friendsList;
     private List<Post> userPosts;
     private List<Comment> userComments;
 
@@ -21,6 +23,7 @@ public class User {
         this.setEmail(email);
         this.setPassword(password);
         this.dateAccountCreation = Instant.now();
+        this.friendsList = new LinkedList<>();
         this.userPosts = new LinkedList<>();
         this.userComments = new LinkedList<>();
     }
@@ -31,10 +34,26 @@ public class User {
         return newPost;
     }
 
+    public Post removePost(Post targetPost) {
+        this.userPosts.remove(targetPost);
+        return targetPost;
+    }
+
     public Comment commentOnPost(String comment, Post post) {
         Comment newComment = post.addComment(this, comment);
         this.userComments.addFirst(newComment);
         return newComment;
+    }
+
+    public Comment removeComment(Comment targetComment) {
+        Post targetPost = targetComment.getCommentedPost();
+        Comment removedComment = targetPost.removeComment(this, targetPost, targetComment);
+
+        if (removedComment != null) {
+            this.userComments.remove(removedComment);
+        }
+
+        return removedComment;
     }
 
     public Instant getDateAccountCreation() {
@@ -78,7 +97,8 @@ public class User {
     }
 
     public String toString() {
-        return "Nome: " + name + "\nEmail: " + email + "\nData de criação da conta: " + formatTime.format(dateAccountCreation);
+        return "Nome: " + name + "\nEmail: " + email + "\nData de criação da conta: "
+                + formatTime.format(dateAccountCreation);
     }
 
 }

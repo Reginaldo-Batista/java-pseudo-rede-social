@@ -28,6 +28,15 @@ public class Post {
         return newComment;
     }
 
+    public Comment removeComment(User commentOwner, Post targetPost, Comment targetComment) {
+        if (targetComment.getCommentOwner().equals(commentOwner)) {
+            this.postComments.remove(targetComment);
+            return targetComment;
+        }
+        return null;
+        
+    }
+
     public User getPostOwner() {
         return postOwner;
     }
