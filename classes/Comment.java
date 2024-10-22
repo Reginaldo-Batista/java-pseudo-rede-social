@@ -9,13 +9,14 @@ public class Comment {
     private User commentOwner;
     private String commentContent;
     private Instant commentCreationDate;
-    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
+    private DateTimeFormatter formatTime;
 
     public Comment(Post commentedPost, User commentOwner, String commentContent) {
         this.commentedPost = commentedPost;
         this.commentOwner = commentOwner;
         this.commentContent = commentContent;
         this.commentCreationDate =  Instant.now();
+        this.formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
     }
 
     public Post getCommentedPost() {

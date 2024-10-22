@@ -11,7 +11,7 @@ public class Post {
     private String postTitle;
     private String postContent;
     private Instant postCreationDateTime;
-    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
+    private DateTimeFormatter formatTime;
     private List<Comment> postComments;
 
     public Post(User postOwner, String postTitle, String postContent) {
@@ -19,6 +19,7 @@ public class Post {
         this.postTitle = postTitle;
         this.postContent = postContent;
         this.postCreationDateTime = Instant.now();
+        this.formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm").withZone(ZoneId.systemDefault());
         this.postComments = new LinkedList<>();
     }
 
@@ -28,13 +29,13 @@ public class Post {
         return newComment;
     }
 
-    public Comment removeComment(User commentOwner, Post targetPost, Comment targetComment) {
-        if (targetComment.getCommentOwner().equals(commentOwner)) {
+    public Comment removeComment(User remotionSolicitant, Post targetPost, Comment targetComment) {
+        Boolean isValid = targetComment.getCommentOwner().equals(remotionSolicitant);
+        if (isValid) {
             this.postComments.remove(targetComment);
             return targetComment;
         }
         return null;
-        
     }
 
     public User getPostOwner() {

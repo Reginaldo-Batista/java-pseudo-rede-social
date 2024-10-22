@@ -12,8 +12,7 @@ public class User {
     private String email;
     private String password;
     private Instant dateAccountCreation;
-    private DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")
-            .withZone(ZoneId.systemDefault());
+    private DateTimeFormatter formatTime;
     private List<User> friendsList;
     private List<Post> userPosts;
     private List<Comment> userComments;
@@ -23,6 +22,8 @@ public class User {
         this.setEmail(email);
         this.setPassword(password);
         this.dateAccountCreation = Instant.now();
+        this.formatTime = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm")
+        .withZone(ZoneId.systemDefault());
         this.friendsList = new LinkedList<>();
         this.userPosts = new LinkedList<>();
         this.userComments = new LinkedList<>();
