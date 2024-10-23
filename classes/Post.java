@@ -14,7 +14,7 @@ public class Post {
     private DateTimeFormatter formatTime;
     private List<Comment> postComments;
 
-    public Post(User postOwner, String postTitle, String postContent) {
+    protected Post(User postOwner, String postTitle, String postContent) {
         this.postOwner = postOwner;
         this.postTitle = postTitle;
         this.postContent = postContent;
@@ -29,13 +29,12 @@ public class Post {
         return newComment;
     }
 
-    public Comment removeComment(User remotionSolicitant, Post targetPost, Comment targetComment) {
-        Boolean isValid = targetComment.getCommentOwner().equals(remotionSolicitant);
+    public Boolean removeComment(User remotionSolicitant, Post associatedPost, Comment targetComment) {
+        Boolean isValid = (targetComment.getCommentOwner().getiD() == remotionSolicitant.getiD());
         if (isValid) {
             this.postComments.remove(targetComment);
-            return targetComment;
         }
-        return null;
+        return isValid;
     }
 
     public User getPostOwner() {

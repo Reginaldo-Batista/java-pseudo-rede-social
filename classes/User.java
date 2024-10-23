@@ -8,6 +8,10 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class User {
+
+    private static long numberOfUsers = 0;
+
+    private long iD;
     private String name;
     private String email;
     private String password;
@@ -18,6 +22,8 @@ public class User {
     private List<Comment> userComments;
 
     public User(String name, String email, String password) {
+        numberOfUsers++;
+        this.iD = numberOfUsers;
         this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
@@ -46,15 +52,20 @@ public class User {
         return newComment;
     }
 
-    public Comment removeComment(Comment targetComment) {
-        Post targetPost = targetComment.getCommentedPost();
-        Comment removedComment = targetPost.removeComment(this, targetPost, targetComment);
+    public Boolean removeComment(Comment targetComment) {
+        User remotionSolicitor = this;
+        Post associatedPost = targetComment.getCommentedPost();
 
-        if (removedComment != null) {
-            this.userComments.remove(removedComment);
+        Boolean isRemoved = associatedPost.removeComment(remotionSolicitor, associatedPost, targetComment);
+
+        if (isRemoved) {
+            this.userComments.remove(targetComment);
         }
+        return isRemoved;
+    }
 
-        return removedComment;
+    public long getiD() {
+        return iD;
     }
 
     public Instant getDateAccountCreation() {
@@ -98,7 +109,7 @@ public class User {
     }
 
     public String toString() {
-        return "Nome: " + name + "\nEmail: " + email + "\nData de criação da conta: "
+        return "ID: " + iD + "\nNome: " + name + "\nEmail: " + email + "\nData de criação da conta: "
                 + formatTime.format(dateAccountCreation);
     }
 

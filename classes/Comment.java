@@ -11,7 +11,7 @@ public class Comment {
     private Instant commentCreationDate;
     private DateTimeFormatter formatTime;
 
-    public Comment(Post commentedPost, User commentOwner, String commentContent) {
+    protected Comment(Post commentedPost, User commentOwner, String commentContent) {
         this.commentedPost = commentedPost;
         this.commentOwner = commentOwner;
         this.commentContent = commentContent;
