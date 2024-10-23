@@ -1,9 +1,7 @@
 package aplicativo;
 
-import classes.User;
-import classes.Post;
+import classes.*;
 
-@SuppressWarnings("unused")
 public class App {
     public static void main(String[] args) {
 
@@ -22,6 +20,7 @@ public class App {
         // Comentando em posts existentes
         maria.commentOnPost("Olá! Bem-vindo!", firstPost_reginaldo);
         reginaldo.commentOnPost("Obrigado!", firstPost_reginaldo);
+        reginaldo.commentOnPost("Você também pode comentar!", secondPost_reginaldo);
 
         // Imprimindo todos os posts do usuário, armazenados em uma LinkedList<Post>
         System.out.println(reginaldo.getUserPosts());
