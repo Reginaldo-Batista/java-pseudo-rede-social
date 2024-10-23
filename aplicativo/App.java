@@ -7,22 +7,24 @@ import classes.Post;
 public class App {
     public static void main(String[] args) {
 
-        User userOne = new User("Reginaldo", "reginaldo@gmail.com", "123");
-        User userTwo = new User("Maria", "maria@gmail.com", "456");
+        // Cadastrando novos usuários
+        User reginaldo = new User("Reginaldo", "reginaldo@gmail.com", "123");
+        User maria = new User("Maria", "maria@gmail.com", "456");
 
-        Post firstPost_UserOne = userOne.createPost("Post inicial", "Olá mundo!");
-        Post secondPost_UserOne = userOne.createPost("Segundo post!", "Olá mundo... de novo :D");
+        // Criando posts a partir do usuário
+        reginaldo.createPost("Post inicial", "Olá mundo!");
+        reginaldo.createPost("Segundo post!", "Olá mundo... de novo :D");
 
-        userTwo.commentOnPost("Olá! Bem-vindo!", firstPost_UserOne);
-        userOne.commentOnPost("Obrigado!", firstPost_UserOne);
-        userOne.commentOnPost("Testaaaaaaando", firstPost_UserOne);
+        // Armazenando posts em variáveis para uso posterior
+        Post firstPost_reginaldo = reginaldo.getUserPosts().get(0);
+        Post secondPost_reginaldo = reginaldo.getUserPosts().get(1);
 
-        System.out.println(firstPost_UserOne);
+        // Comentando em posts existentes
+        maria.commentOnPost("Olá! Bem-vindo!", firstPost_reginaldo);
+        reginaldo.commentOnPost("Obrigado!", firstPost_reginaldo);
 
-        System.out.println("--------------------------------");
-        System.out.println("Printando todos os posts de " + userOne.getName());
-        System.out.println(userOne.getUserPosts());
-        System.out.println("--------------------------------");
+        // Imprimindo todos os posts do usuário, armazenados em uma LinkedList<Post>
+        System.out.println(reginaldo.getUserPosts());
 
     }
 }
