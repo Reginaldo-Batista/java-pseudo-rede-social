@@ -29,12 +29,8 @@ public class Post {
         return newComment;
     }
 
-    public Boolean removeComment(User remotionSolicitant, Post associatedPost, Comment targetComment) {
-        Boolean isValid = (targetComment.getCommentOwner().getiD() == remotionSolicitant.getiD());
-        if (isValid) {
-            this.postComments.remove(targetComment);
-        }
-        return isValid;
+    public void removeComment(User remotionSolicitant, Post associatedPost, Comment targetComment) {
+        this.postComments.remove(targetComment);
     }
 
     public User getPostOwner() {

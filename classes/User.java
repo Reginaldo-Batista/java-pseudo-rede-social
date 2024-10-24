@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
+import validations.Validation;
+
 @SuppressWarnings("unused")
 public class User {
 
@@ -54,14 +56,17 @@ public class User {
 
     public Boolean removeComment(Comment targetComment) {
         User remotionSolicitor = this;
-        Post associatedPost = targetComment.getCommentedPost();
+        User commentOwner = targetComment.getCommentOwner();
+        Boolean sameId = Validation.isSameUser(remotionSolicitor, commentOwner);
 
-        Boolean isRemoved = associatedPost.removeComment(remotionSolicitor, associatedPost, targetComment);
-
-        if (isRemoved) {
+        if (sameId) {
+            Post associatedPost = targetComment.getCommentedPost();
+            associatedPost.removeComment(remotionSolicitor, associatedPost, targetComment);
             this.userComments.remove(targetComment);
+            return true;
         }
-        return isRemoved;
+
+        return false;
     }
 
     public long getiD() {
