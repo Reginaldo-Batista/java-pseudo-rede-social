@@ -18,9 +18,9 @@ public class App {
         Post secondPost_reginaldo = reginaldo.getUserPosts().get(1);
 
         // Comentando em posts existentes
-        maria.commentOnPost("Olá! Bem-vindo!", firstPost_reginaldo);
-        reginaldo.commentOnPost("Obrigado!", firstPost_reginaldo);
-        reginaldo.commentOnPost("Você também pode comentar!", secondPost_reginaldo);
+        maria.addComment("Olá! Bem-vindo!", firstPost_reginaldo);
+        reginaldo.addComment("Obrigado!", firstPost_reginaldo);
+        reginaldo.addComment("Você também pode comentar!", secondPost_reginaldo);
 
         // Imprimindo todos os posts do usuário, armazenados em uma LinkedList<Post>
         System.out.println(reginaldo.getUserPosts());

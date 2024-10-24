@@ -11,9 +11,9 @@ import validations.Validation;
 @SuppressWarnings("unused")
 public class User {
 
-    private static long numberOfUsers = 0;
+    private static long numberOfUsers = 0L;
 
-    private long iD;
+    private final long USER_ID;
     private String name;
     private String email;
     private String password;
@@ -25,7 +25,7 @@ public class User {
 
     public User(String name, String email, String password) {
         numberOfUsers++;
-        this.iD = numberOfUsers;
+        this.USER_ID = numberOfUsers;
         this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
@@ -48,7 +48,7 @@ public class User {
         return targetPost;
     }
 
-    public Comment commentOnPost(String comment, Post post) {
+    public Comment addComment(String comment, Post post) {
         Comment newComment = post.addComment(this, comment);
         this.userComments.addFirst(newComment);
         return newComment;
@@ -57,9 +57,9 @@ public class User {
     public Boolean removeComment(Comment targetComment) {
         User remotionSolicitor = this;
         User commentOwner = targetComment.getCommentOwner();
-        Boolean sameId = Validation.isSameUser(remotionSolicitor, commentOwner);
+        Boolean isSameUser = Validation.isSameUser(remotionSolicitor, commentOwner);
 
-        if (sameId) {
+        if (isSameUser) {
             Post associatedPost = targetComment.getCommentedPost();
             associatedPost.removeComment(remotionSolicitor, associatedPost, targetComment);
             this.userComments.remove(targetComment);
@@ -69,8 +69,8 @@ public class User {
         return false;
     }
 
-    public long getiD() {
-        return iD;
+    public long getUserId() {
+        return USER_ID;
     }
 
     public Instant getDateAccountCreation() {
@@ -114,7 +114,7 @@ public class User {
     }
 
     public String toString() {
-        return "ID: " + iD + "\nNome: " + name + "\nEmail: " + email + "\nData de criação da conta: "
+        return "ID: " + USER_ID + "\nNome: " + name + "\nEmail: " + email + "\nData de criação da conta: "
                 + formatTime.format(dateAccountCreation);
     }
 

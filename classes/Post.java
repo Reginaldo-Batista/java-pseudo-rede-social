@@ -23,14 +23,22 @@ public class Post {
         this.postComments = new LinkedList<>();
     }
 
-    public Comment addComment(User commentOwner, String content) {
+    protected Comment addComment(User commentOwner, String content) {
         Comment newComment = new Comment(this, commentOwner, content);
         this.postComments.add(newComment);
         return newComment;
     }
 
-    public void removeComment(User remotionSolicitant, Post associatedPost, Comment targetComment) {
+    protected void removeComment(User remotionSolicitant, Post associatedPost, Comment targetComment) {
         this.postComments.remove(targetComment);
+    }
+
+    protected void setPostTitle(String postTitle) {
+        this.postTitle = postTitle;
+    }
+
+    protected void setPostContent(String postContent) {
+        this.postContent = postContent;
     }
 
     public User getPostOwner() {
@@ -41,18 +49,6 @@ public class Post {
         return postTitle;
     }
 
-    public void setPostTitle(String postTitle) {
-        this.postTitle = postTitle;
-    }
-
-    public String getPostContent() {
-        return postContent;
-    }
-
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
-    }
-
     public Instant getPostCreationDateTime() {
         return postCreationDateTime;
     }
@@ -61,12 +57,12 @@ public class Post {
         return postComments;
     }
 
-    public void setPostComments(List<Comment> postComments) {
-        this.postComments = postComments;
+    public String getPostContent() {
+        return postContent;
     }
 
     public String toString() {
-        return "\nPost de " + postOwner.getName() +  
+        return "\nPost de " + postOwner.getName() +
                 "\nTítulo: " + postTitle +
                 "\nConteúdo: " + postContent +
                 "\nData de postagem: " + formatTime.format(postCreationDateTime) +
