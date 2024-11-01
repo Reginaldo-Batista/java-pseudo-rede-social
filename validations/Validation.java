@@ -8,4 +8,6 @@ public class Validation {
         return userOne.getUserId() == userTwo.getUserId();
     }
 
+    private Validation() {}
+
 }
