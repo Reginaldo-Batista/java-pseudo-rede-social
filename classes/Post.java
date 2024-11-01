@@ -67,6 +67,6 @@ public class Post {
                 "\nConteúdo: " + postContent +
                 "\nData de postagem: " + formatTime.format(postCreationDateTime) +
                 "\n\n" +
-                "Comentários:\n" + postComments + "\n";
+                "Comentários:";
     }
 }

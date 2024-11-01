@@ -1,6 +1,7 @@
 package aplicativo;
 
 import classes.*;
+import print_controller.Printer;
 
 public class App {
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class App {
         reginaldo.addComment("Você também pode comentar!", secondPost_reginaldo);
 
         // Imprimindo todos os posts do usuário, armazenados em uma LinkedList<Post>
-        System.out.println(reginaldo.getUserPosts());
+        Printer.printUserPosts(reginaldo);
 
     }
 }

@@ -50,7 +50,7 @@ public class User {
 
     public Comment addComment(String comment, Post post) {
         Comment newComment = post.addComment(this, comment);
-        this.userComments.addFirst(newComment);
+        this.userComments.add(newComment);
         return newComment;
     }
 
